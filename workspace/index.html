@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <script type="text/javascript">
+            function sendIT() {
+              // stop the regular form submission
+              var form = document.form1;
+              // collect the form data while iterating over the inputs
+              var data = {};
+              for (var i = 0, ii = form.length; i < ii; ++i) {
+                var input = form[i];
+                if (input.name) {
+                  data[input.name] = input.value;
+                }
+              }
+              console.log(data);
+              // construct an HTTP request
+              var xhr = new XMLHttpRequest();
+              xhr.open(form.method, "/consumer", true);
+              xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+              // send the collected data as JSON
+              xhr.send(JSON.stringify(data));
+            }
+        </script>
+    <body>
+        <h1>Input Message</h1>
+        <form name = "form1" action="javascript:sendIT()" method="post">
+            <h2>Title</h2>
+            <input type="text" name="title"/><br>
+            <h2>Message</h2>
+            <input type="text" name="message"/><br>
+            <input type="submit" value="Submit" >
+        </form>
+    </body>        
+</html>
